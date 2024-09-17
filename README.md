@@ -56,10 +56,12 @@ End-to-end testing is not conducted on these modules, as they are individual com
 | [azurerm_firewall_policy](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/firewall_policy) | resource |
 | [azurerm_role_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
 | [azurerm_user_assigned_identity](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/user_assigned_identity) | resource |
+| [azurerm_firewall_policy_rule_collection_group](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/firewall_policy_rule_collection_group) | resource |
+| [azurerm_ip_group](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/ip_group) | resource |
 
 ## Inputs
 
-| Name | Description | Type | Required |
+| Name | Description | Types | Requireds |
 | :-- | :-- | :-- | :-- |
 | `config` | contains all firewall policy configuration | object | yes |
 | `naming` | contains naming convention | string | yes |
