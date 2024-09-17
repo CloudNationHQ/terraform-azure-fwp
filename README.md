@@ -42,6 +42,13 @@ End-to-end testing is not conducted on these modules, as they are individual com
 |------|---------|
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~> 3.61 |
 
+## Modules
+
+| Name | Source |
+|------|--------|
+| [collection-rule-groups](./modules/collection-rule-groups) | resource |
+| [ip-groups](./modules/ip-groups) | resource |
+
 ## Resources
 
 | Name | Type |
