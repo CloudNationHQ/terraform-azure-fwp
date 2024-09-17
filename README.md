@@ -61,7 +61,7 @@ End-to-end testing is not conducted on these modules, as they are individual com
 
 ## Inputs
 
-| Name | Description | Types | Requireds |
+| Name | Description | Type | Required |
 | :-- | :-- | :-- | :-- |
 | `config` | contains all firewall policy configuration | object | yes |
 | `naming` | contains naming convention | string | yes |
