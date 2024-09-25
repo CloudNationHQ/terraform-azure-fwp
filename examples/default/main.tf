@@ -7,7 +7,7 @@ module "naming" {
 
 module "rg" {
   source  = "cloudnationhq/rg/azure"
-  version = "~> 1.0"
+  version = "~> 2.0"
 
   groups = {
     demo = {
@@ -19,7 +19,7 @@ module "rg" {
 
 module "fw_policy" {
   source  = "cloudnationhq/fwp/azure"
-  version = "~> 1.0"
+  version = "~> 2.0"
 
   config = {
     name           = module.naming.firewall_policy.name
