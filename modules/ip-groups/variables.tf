@@ -10,8 +10,8 @@ variable "location" {
   default     = null
 }
 
-variable "resourcegroup" {
-  description = "contains the resourcegroup name"
+variable "resource_group" {
+  description = "contains the resource group name"
   type        = string
   default     = null
 }

@@ -6,7 +6,7 @@ resource "azurerm_ip_group" "ipgroup" {
 
   name                = try(each.value.name, join("-", [var.naming.ip_group, each.key]))
   location            = var.location
-  resource_group_name = var.resourcegroup
+  resource_group_name = var.resource_group
   cidrs               = can(tolist(each.value.cidr)) ? tolist(each.value.cidr) : values(each.value.cidr)
   tags                = try(each.value.tags, {})
 }

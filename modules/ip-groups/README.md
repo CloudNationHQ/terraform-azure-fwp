@@ -29,7 +29,7 @@ This submodule focuses on the effective management of ip groups.
 | <a name="input_ip_groups"></a> [ip\_groups](#input\_ip\_groups) | describes all ip groups | `map(any)` | `{}` | no |
 | <a name="input_location"></a> [location](#input\_location) | contains the region | `string` | `null` | no |
 | <a name="input_naming"></a> [naming](#input\_naming) | contains naming convention | `map(string)` | `null` | no |
-| <a name="input_resourcegroup"></a> [resourcegroup](#input\_resourcegroup) | contains the resourcegroup name | `string` | `null` | no |
+| <a name="input_resource_group"></a> [resourcegroup](#input\_resource_group) | contains the resource group name | `string` | `null` | no |
 
 ## Outputs
 
