@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.0](https://github.com/CloudNationHQ/terraform-azure-fwp/compare/v2.0.0...v2.1.0) (2024-10-11)
+
+
+### Features
+
+* auto generated docs and refine makefile ([#7](https://github.com/CloudNationHQ/terraform-azure-fwp/issues/7)) ([75ba327](https://github.com/CloudNationHQ/terraform-azure-fwp/commit/75ba327a3fa5dcc7f1d2b4af61aa5e1a1b77013d))
+* **deps:** bump github.com/gruntwork-io/terratest in /tests ([#6](https://github.com/CloudNationHQ/terraform-azure-fwp/issues/6)) ([eaa683d](https://github.com/CloudNationHQ/terraform-azure-fwp/commit/eaa683d08b8526b5f5386cd16b72f42d4d54fc28))
+
 ## [2.0.0](https://github.com/CloudNationHQ/terraform-azure-fwp/compare/v1.0.0...v2.0.0) (2024-09-25)
 
 
