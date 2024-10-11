@@ -1,5 +1,5 @@
 # firewall policy
-resource "azurerm_firewall_policy" "policys" {
+resource "azurerm_firewall_policy" "policy" {
 
   name                              = try(var.config.name, var.naming.firewall_policy)
   resource_group_name               = coalesce(lookup(var.config, "resource_group", null), var.resource_group)
