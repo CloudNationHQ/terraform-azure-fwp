@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/CloudNationHQ/terraform-azure-fwp/compare/v2.1.0...v2.2.0) (2024-11-11)
+
+
+### Features
+
+* enhance testing with sequential, parallel modes and flags for exceptions and skip-destroy ([#9](https://github.com/CloudNationHQ/terraform-azure-fwp/issues/9)) ([19142dc](https://github.com/CloudNationHQ/terraform-azure-fwp/commit/19142dc05bec0f0bcf2b50c2493896be7dce7110))
+
 ## [2.1.0](https://github.com/CloudNationHQ/terraform-azure-fwp/compare/v2.0.0...v2.1.0) (2024-10-11)
 
 
