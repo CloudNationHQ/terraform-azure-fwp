@@ -130,13 +130,19 @@ resource "azurerm_user_assigned_identity" "uai" {
   name                = "id-fwpolicy-${var.config.name}"
   resource_group_name = coalesce(lookup(var.config, "resource_group", null), var.resource_group)
   location            = coalesce(lookup(var.config, "location", null), var.location)
+
+  tags = try(var.config.tags, var.tags, {})
 }
 
 # role assignment
 resource "azurerm_role_assignment" "role" {
   for_each = lookup(var.config, "tls_certificate", null) != null ? { "tls_cert" = var.config.tls_certificate } : {}
 
-  scope                = var.config.key_vault_id
-  role_definition_name = "Key Vault Secrets User"
-  principal_id         = azurerm_user_assigned_identity.uai[each.key].principal_id
+  scope                                  = var.config.key_vault_id
+  role_definition_name                   = "Key Vault Secrets User"
+  principal_id                           = azurerm_user_assigned_identity.uai[each.key].principal_id
+  description                            = "Role Based Access Control for Firewall Policy to access Key Vault"
+  condition                              = try(var.config.condition, null)
+  condition_version                      = try(var.config.condition_version, null)
+  delegated_managed_identity_resource_id = try(var.config.delegated_managed_identity_resource_id, null)
 }
