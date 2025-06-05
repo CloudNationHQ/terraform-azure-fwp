@@ -1,6 +1,6 @@
 module "naming" {
   source  = "cloudnationhq/naming/azure"
-  version = "~> 0.1"
+  version = "~> 0.24"
 
   suffix = ["demo", "dev"]
 }
@@ -19,20 +19,18 @@ module "rg" {
 
 module "fw_policy" {
   source  = "cloudnationhq/fwp/azure"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   config = {
-    name           = module.naming.firewall_policy.name
-    resource_group = module.rg.groups.demo.name
-    location       = module.rg.groups.demo.location
+    name                = module.naming.firewall_policy.name
+    resource_group_name = module.rg.groups.demo.name
+    location            = module.rg.groups.demo.location
   }
 }
 
 module "collection_rule_groups" {
   source  = "cloudnationhq/fwp/azure//modules/collection-rule-groups"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
-  resource_group = module.rg.groups.demo.name
-  location       = module.rg.groups.demo.location
-  groups         = local.collection_rule_groups
+  groups = local.collection_rule_groups
 }

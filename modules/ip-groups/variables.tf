@@ -1,6 +1,17 @@
 variable "ip_groups" {
-  description = "describes all ip groups"
-  type        = map(any)
+  description = "Contains all ip groups configuration"
+  type = map(object({
+    name                = optional(string, null)
+    resource_group_name = optional(string, null)
+    location            = optional(string, null)
+    cidr                = any
+    tags                = optional(map(string))
+  }))
+}
+
+variable "tags" {
+  description = "tags to be added to the resources"
+  type        = map(string)
   default     = {}
 }
 
@@ -10,7 +21,7 @@ variable "location" {
   default     = null
 }
 
-variable "resource_group" {
+variable "resource_group_name" {
   description = "contains the resource group name"
   type        = string
   default     = null
