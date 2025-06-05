@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/CloudNationHQ/terraform-azure-fwp/compare/v3.0.0...v3.1.0) (2025-06-05)
+
+
+### Features
+
+* **deps:** bump github.com/gruntwork-io/terratest in /tests ([#26](https://github.com/CloudNationHQ/terraform-azure-fwp/issues/26)) ([9465a0d](https://github.com/CloudNationHQ/terraform-azure-fwp/commit/9465a0d946fcf4a87343e51de71481a1c69c743a))
+
 ## [3.0.0](https://github.com/CloudNationHQ/terraform-azure-fwp/compare/v2.3.0...v3.0.0) (2025-06-05)
 
 
