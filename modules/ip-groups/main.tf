@@ -4,9 +4,28 @@ resource "azurerm_ip_group" "ipgroup" {
     var.ip_groups, {}
   )
 
-  name                = try(each.value.name, join("-", [var.naming.ip_group, each.key]))
-  location            = var.location
-  resource_group_name = var.resource_group
-  cidrs               = can(tolist(each.value.cidr)) ? tolist(each.value.cidr) : values(each.value.cidr)
-  tags                = try(each.value.tags, {})
+  name = coalesce(
+    each.value.name, try(
+      join("-", [var.naming.ip_group, each.key]), null
+    ), each.key
+  )
+
+  resource_group_name = coalesce(
+    lookup(
+      each.value, "resource_group_name", null
+    ), var.resource_group_name
+  )
+
+  location = coalesce(
+    lookup(each.value, "location", null
+    ), var.location
+  )
+
+  cidrs = can(
+    tolist(each.value.cidr)
+  ) ? tolist(each.value.cidr) : values(each.value.cidr)
+
+  tags = coalesce(
+    each.value.tags, var.tags
+  )
 }

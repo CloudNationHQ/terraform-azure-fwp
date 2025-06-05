@@ -1,6 +1,6 @@
 module "naming" {
   source  = "cloudnationhq/naming/azure"
-  version = "~> 0.1"
+  version = "~> 0.24"
 
   suffix = ["demo", "dev"]
 }
@@ -19,22 +19,22 @@ module "rg" {
 
 module "analytics" {
   source  = "cloudnationhq/law/azure"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   workspace = {
-    name           = module.naming.log_analytics_workspace.name_unique
-    location       = module.rg.groups.demo.location
-    resource_group = module.rg.groups.demo.name
+    name                = module.naming.log_analytics_workspace.name_unique
+    location            = module.rg.groups.demo.location
+    resource_group_name = module.rg.groups.demo.name
   }
 }
 
 module "fw_policy" {
   source  = "cloudnationhq/fwp/azure"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   config = {
     name                              = module.naming.firewall_policy.name
-    resource_group                    = module.rg.groups.demo.name
+    resource_group_name               = module.rg.groups.demo.name
     location                          = module.rg.groups.demo.location
     sku                               = "Premium"
     threat_intelligence_mode          = "Deny"
@@ -51,18 +51,17 @@ module "fw_policy" {
     intrusion_detection = {
       mode           = "Alert"
       private_ranges = ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
-
       traffic_bypass = {
-        health_probes = {
-          name                  = "HealthProbes"
+        azure_load_balancer_probes = {
           protocol              = "TCP"
-          description           = "Bypass rule for health probes"
-          destination_ports     = ["65200-65535"]
-          source_addresses      = ["*"]
-          destination_addresses = ["*"]
+          description           = "Bypass intrusion detection for Azure Load Balancer health probes"
+          destination_ports     = ["80", "443", "8080"]
+          source_addresses      = ["168.63.129.16"]
+          destination_addresses = ["10.1.0.0/24"]
+          destination_ip_groups = []
+          source_ip_groups      = []
         }
       }
-
       signature_overrides = {
         ms_ise_rule = {
           id    = "2024897"
