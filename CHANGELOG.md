@@ -13,6 +13,12 @@
 * enhance role assignment with additional parameters and tags ([#19](https://github.com/CloudNationHQ/terraform-azure-fwp/issues/19)) ([e6df8aa](https://github.com/CloudNationHQ/terraform-azure-fwp/commit/e6df8aaba63c7a66462a5ca29f0d7256583df50b))
 * small refactor ([#27](https://github.com/CloudNationHQ/terraform-azure-fwp/issues/27)) ([558106d](https://github.com/CloudNationHQ/terraform-azure-fwp/commit/558106d8b9edb1e4782b8b25838970583d079cac))
 
+### Upgrade from v2.3.0 to v3.0.0:
+
+- Update module reference to: `version = "~> 3.0"`
+- The property and variable resource_group is renamed to resource_group_name
+- The user assigned identity resource is removed, there is a dedicated module for this
+
 ## [2.3.0](https://github.com/CloudNationHQ/terraform-azure-fwp/compare/v2.2.0...v2.3.0) (2025-01-20)
 
 
