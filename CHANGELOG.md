@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.1.0](https://github.com/CloudNationHQ/terraform-azure-fwp/compare/v3.0.0...v3.1.0) (2025-07-07)
+
+
+### Features
+
+* **deps:** bump github.com/gruntwork-io/terratest in /tests ([#26](https://github.com/CloudNationHQ/terraform-azure-fwp/issues/26)) ([9465a0d](https://github.com/CloudNationHQ/terraform-azure-fwp/commit/9465a0d946fcf4a87343e51de71481a1c69c743a))
+* update firewall_policy_id handling and add validation for groups ([#29](https://github.com/CloudNationHQ/terraform-azure-fwp/issues/29)) ([a4195a1](https://github.com/CloudNationHQ/terraform-azure-fwp/commit/a4195a1f740727dc33ebe14056eefb96f3e12120))
+
 ## [3.0.0](https://github.com/CloudNationHQ/terraform-azure-fwp/compare/v2.3.0...v3.0.0) (2025-06-05)
 
 
