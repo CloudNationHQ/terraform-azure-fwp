@@ -6,9 +6,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "group" {
     each.value.name, format("fwrcg-%s", each.key)
   )
 
-  firewall_policy_id = try(
-    var.groups[each.key].firewall_policy_id, null
-  )
+  firewall_policy_id = coalesce(var.groups[each.key].firewall_policy_id, var.firewall_policy_id)
 
   priority = each.value.priority
 

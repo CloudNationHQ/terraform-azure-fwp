@@ -1,3 +1,9 @@
+variable "firewall_policy_id" {
+  description = "The ID of the Firewall Policy to which rule collection groups will be applied."
+  type        = string
+  default     = null
+}
+
 variable "groups" {
   description = "Contains all firewall policy rule collection groups config"
   type = map(object({
@@ -63,4 +69,12 @@ variable "groups" {
       }))
     })), {})
   }))
+
+  validation {
+    condition = var.firewall_policy_id != null || alltrue([
+      for group_key, group in var.groups :
+      group.firewall_policy_id != null
+    ])
+    error_message = "If the top-level firewall_policy_id is not set, each group in the groups map must have its own firewall_policy_id specified."
+  }
 }
