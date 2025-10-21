@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.2.0](https://github.com/CloudNationHQ/terraform-azure-fwp/compare/v3.1.0...v3.2.0) (2025-10-21)
+
+
+### Features
+
+* **deps:** bump github.com/cloudnationhq/az-cn-go-validor in /tests ([#35](https://github.com/CloudNationHQ/terraform-azure-fwp/issues/35)) ([3914c47](https://github.com/CloudNationHQ/terraform-azure-fwp/commit/3914c474abf702c1ed098395adafcf08c17bf95a))
+* **deps:** bump github.com/ulikunitz/xz from 0.5.10 to 0.5.14 in /tests ([#32](https://github.com/CloudNationHQ/terraform-azure-fwp/issues/32)) ([cd991e6](https://github.com/CloudNationHQ/terraform-azure-fwp/commit/cd991e6f68f8f32afccf8f391d404242f6e836f6))
+* use list syntax for optional dynamic blocks and remove redundant null defaults ([#36](https://github.com/CloudNationHQ/terraform-azure-fwp/issues/36)) ([f627d78](https://github.com/CloudNationHQ/terraform-azure-fwp/commit/f627d7882fb939027aac60a21cfd2e162b81d81e))
+
 ## [3.1.0](https://github.com/CloudNationHQ/terraform-azure-fwp/compare/v3.0.0...v3.1.0) (2025-07-07)
 
 
