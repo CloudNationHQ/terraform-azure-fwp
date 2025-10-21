@@ -8,7 +8,7 @@ variable "groups" {
   description = "Contains all firewall policy rule collection groups config"
   type = map(object({
     name               = optional(string)
-    firewall_policy_id = optional(string, null)
+    firewall_policy_id = optional(string)
     priority           = number
     network_rule_collections = optional(map(object({
       name     = optional(string)
@@ -16,7 +16,7 @@ variable "groups" {
       action   = string
       rules = map(object({
         name                  = optional(string)
-        description           = optional(string, null)
+        description           = optional(string)
         protocols             = list(string)
         destination_ports     = list(string)
         destination_addresses = optional(list(string), [])
@@ -32,15 +32,15 @@ variable "groups" {
       action   = string
       rules = map(object({
         name                  = optional(string)
-        description           = optional(string, null)
-        source_addresses      = optional(list(string), null)
-        source_ip_groups      = optional(list(string), null)
-        destination_addresses = optional(list(string), null)
-        destination_urls      = optional(list(string), null)
-        destination_fqdns     = optional(list(string), null)
-        destination_fqdn_tags = optional(list(string), null)
-        terminate_tls         = optional(bool, null)
-        web_categories        = optional(list(string), null)
+        description           = optional(string)
+        source_addresses      = optional(list(string))
+        source_ip_groups      = optional(list(string))
+        destination_addresses = optional(list(string))
+        destination_urls      = optional(list(string))
+        destination_fqdns     = optional(list(string))
+        destination_fqdn_tags = optional(list(string))
+        terminate_tls         = optional(bool)
+        web_categories        = optional(list(string))
         protocols = optional(list(object({
           type = string
           port = number
@@ -57,15 +57,15 @@ variable "groups" {
       action   = string
       rules = map(object({
         name                = optional(string)
-        description         = optional(string, null)
+        description         = optional(string)
         protocols           = list(string)
-        source_addresses    = optional(list(string), null)
-        source_ip_groups    = optional(list(string), null)
-        destination_address = optional(string, null)
-        destination_ports   = optional(list(string), null)
-        translated_address  = optional(string, null)
-        translated_fqdn     = optional(string, null)
-        translated_port     = optional(string, null)
+        source_addresses    = optional(list(string))
+        source_ip_groups    = optional(list(string))
+        destination_address = optional(string)
+        destination_ports   = optional(list(string))
+        translated_address  = optional(string)
+        translated_fqdn     = optional(string)
+        translated_port     = optional(string)
       }))
     })), {})
   }))

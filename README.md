@@ -47,27 +47,27 @@ Type:
 ```hcl
 object({
     name                              = string
-    resource_group_name               = optional(string, null)
-    location                          = optional(string, null)
-    private_ip_ranges                 = optional(list(string), null)
+    resource_group_name               = optional(string)
+    location                          = optional(string)
+    private_ip_ranges                 = optional(list(string))
     sku                               = optional(string, "Standard")
-    sql_redirect_allowed              = optional(bool, null)
+    sql_redirect_allowed              = optional(bool)
     threat_intelligence_mode          = optional(string, "Alert")
-    base_policy_id                    = optional(string, null)
-    auto_learn_private_ranges_enabled = optional(bool, null)
+    base_policy_id                    = optional(string)
+    auto_learn_private_ranges_enabled = optional(bool)
     tags                              = optional(map(string))
-    key_vault_id                      = optional(string, null)
-    principal_id                      = optional(string, null)
+    key_vault_id                      = optional(string)
+    principal_id                      = optional(string)
     dns = optional(object({
       proxy_enabled = optional(bool, false)
       servers       = optional(list(string), [])
-    }), null)
+    }))
     intrusion_detection = optional(object({
-      mode           = optional(string, null)
-      private_ranges = optional(list(string), null)
+      mode           = optional(string)
+      private_ranges = optional(list(string))
       traffic_bypass = optional(map(object({
         protocol              = string
-        description           = optional(string, null)
+        description           = optional(string)
         destination_addresses = optional(list(string), [])
         destination_ip_groups = optional(list(string), [])
         destination_ports     = optional(list(string), [])
@@ -75,39 +75,39 @@ object({
         source_ip_groups      = optional(list(string), [])
       })), {})
       signature_overrides = optional(map(object({
-        id    = optional(string, null)
-        state = optional(string, null)
+        id    = optional(string)
+        state = optional(string)
       })), {})
-    }), null)
+    }))
     identity = optional(object({
       type         = string
       identity_ids = list(string)
-    }), null)
+    }))
     tls_certificate = optional(object({
       key_vault_secret_id = string
       name                = string
-    }), null)
+    }))
     explicit_proxy = optional(object({
-      enabled         = optional(bool, null)
-      http_port       = optional(number, null)
-      https_port      = optional(number, null)
-      enable_pac_file = optional(bool, null)
-      pac_file        = optional(string, null)
-      pac_file_port   = optional(number, null)
-    }), null)
+      enabled         = optional(bool)
+      http_port       = optional(number)
+      https_port      = optional(number)
+      enable_pac_file = optional(bool)
+      pac_file        = optional(string)
+      pac_file_port   = optional(number)
+    }))
     threat_intelligence_allowlist = optional(object({
-      fqdns        = optional(list(string), null)
-      ip_addresses = optional(list(string), null)
-    }), null)
+      fqdns        = optional(list(string))
+      ip_addresses = optional(list(string))
+    }))
     insights = optional(object({
       enabled                            = bool
       default_log_analytics_workspace_id = string
-      retention_in_days                  = optional(number, null)
+      retention_in_days                  = optional(number)
       log_analytics_workspace = optional(map(object({
         id                = string
         firewall_location = string
       })), {})
-    }), null)
+    }))
   })
 ```
 
