@@ -24,7 +24,7 @@ resource "azurerm_firewall_policy" "policy" {
   )
 
   dynamic "dns" {
-    for_each = lookup(var.config, "dns", null) != null ? { "default" = var.config.dns } : {}
+    for_each = lookup(var.config, "dns", null) != null ? [var.config.dns] : []
 
     content {
       proxy_enabled = dns.value.proxy_enabled
@@ -33,7 +33,7 @@ resource "azurerm_firewall_policy" "policy" {
   }
 
   dynamic "intrusion_detection" {
-    for_each = lookup(var.config, "intrusion_detection", null) != null ? { "default" = var.config.intrusion_detection } : {}
+    for_each = lookup(var.config, "intrusion_detection", null) != null ? [var.config.intrusion_detection] : []
 
     content {
       mode           = intrusion_detection.value.mode
@@ -79,7 +79,7 @@ resource "azurerm_firewall_policy" "policy" {
   }
 
   dynamic "tls_certificate" {
-    for_each = lookup(var.config, "tls_certificate", null) != null ? { "default" = var.config.tls_certificate } : {}
+    for_each = lookup(var.config, "tls_certificate", null) != null ? [var.config.tls_certificate] : []
 
     content {
       key_vault_secret_id = tls_certificate.value.key_vault_secret_id
@@ -88,7 +88,7 @@ resource "azurerm_firewall_policy" "policy" {
   }
 
   dynamic "explicit_proxy" {
-    for_each = lookup(var.config, "explicit_proxy", null) != null ? { "default" = var.config.explicit_proxy } : {}
+    for_each = lookup(var.config, "explicit_proxy", null) != null ? [var.config.explicit_proxy] : []
 
     content {
       enabled         = explicit_proxy.value.enabled
@@ -101,7 +101,7 @@ resource "azurerm_firewall_policy" "policy" {
   }
 
   dynamic "threat_intelligence_allowlist" {
-    for_each = lookup(var.config, "threat_intelligence_allowlist", null) != null ? { "default" = var.config.threat_intelligence_allowlist } : {}
+    for_each = lookup(var.config, "threat_intelligence_allowlist", null) != null ? [var.config.threat_intelligence_allowlist] : []
 
     content {
       fqdns        = threat_intelligence_allowlist.value.fqdns
@@ -110,7 +110,7 @@ resource "azurerm_firewall_policy" "policy" {
   }
 
   dynamic "insights" {
-    for_each = lookup(var.config, "insights", null) != null ? { "default" = var.config.insights } : {}
+    for_each = lookup(var.config, "insights", null) != null ? [var.config.insights] : []
 
     content {
       enabled                            = insights.value.enabled
