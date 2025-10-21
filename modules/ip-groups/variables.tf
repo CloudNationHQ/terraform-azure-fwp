@@ -1,9 +1,9 @@
 variable "ip_groups" {
   description = "Contains all ip groups configuration"
   type = map(object({
-    name                = optional(string, null)
-    resource_group_name = optional(string, null)
-    location            = optional(string, null)
+    name                = optional(string)
+    resource_group_name = optional(string)
+    location            = optional(string)
     cidr                = any
     tags                = optional(map(string))
   }))
