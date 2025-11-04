@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.0.0](https://github.com/CloudNationHQ/terraform-azure-fwp/compare/v3.2.0...v4.0.0) (2025-11-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* this change expects to change the existing data structure
+
+### Features
+
+* restructure tls_certificate to include role assignment properties ([#38](https://github.com/CloudNationHQ/terraform-azure-fwp/issues/38)) ([3503be5](https://github.com/CloudNationHQ/terraform-azure-fwp/commit/3503be5a4482e12036bc293b95033fdc8a766f1d))
+
 ## [3.2.0](https://github.com/CloudNationHQ/terraform-azure-fwp/compare/v3.1.0...v3.2.0) (2025-10-21)
 
 
