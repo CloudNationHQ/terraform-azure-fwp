@@ -84,8 +84,19 @@ object({
       identity_ids = list(string)
     }))
     tls_certificate = optional(object({
-      key_vault_secret_id = string
-      name                = string
+      key_vault_secret_id                    = string
+      name                                   = string
+      key_vault_id                           = string
+      principal_id                           = string
+      role_assignment_name                   = optional(string)
+      role_definition_name                   = optional(string, "Key Vault Secrets User")
+      role_definition_id                     = optional(string)
+      condition                              = optional(string)
+      condition_version                      = optional(string)
+      description                            = optional(string, "Key Vault Secrets User role assignment for firewall policy")
+      delegated_managed_identity_resource_id = optional(string)
+      skip_service_principal_aad_check       = optional(bool)
+      principal_type                         = optional(string, "ServicePrincipal")
     }))
     explicit_proxy = optional(object({
       enabled         = optional(bool)
