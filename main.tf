@@ -140,7 +140,15 @@ resource "azurerm_firewall_policy" "policy" {
 resource "azurerm_role_assignment" "role" {
   for_each = lookup(var.config, "tls_certificate", null) != null ? { "tls_cert" = var.config.tls_certificate } : {}
 
-  scope                = var.config.key_vault_id
-  role_definition_name = "Key Vault Secrets User"
-  principal_id         = var.config.principal_id
+  scope                                  = each.value.key_vault_id
+  name                                   = each.value.role_assignment_name
+  role_definition_name                   = each.value.role_definition_name
+  role_definition_id                     = each.value.role_definition_id
+  principal_id                           = each.value.principal_id
+  condition                              = each.value.condition
+  condition_version                      = each.value.condition_version
+  description                            = each.value.description
+  delegated_managed_identity_resource_id = each.value.delegated_managed_identity_resource_id
+  skip_service_principal_aad_check       = each.value.skip_service_principal_aad_check
+  principal_type                         = each.value.principal_type
 }

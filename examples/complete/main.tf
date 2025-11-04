@@ -30,7 +30,7 @@ module "analytics" {
 
 module "fw_policy" {
   source  = "cloudnationhq/fwp/azure"
-  version = "~> 3.0"
+  version = "~> 4.0"
 
   config = {
     name                              = module.naming.firewall_policy.name

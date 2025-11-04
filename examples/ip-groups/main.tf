@@ -19,7 +19,7 @@ module "rg" {
 
 module "fw_policy" {
   source  = "cloudnationhq/fwp/azure"
-  version = "~> 3.0"
+  version = "~> 4.0"
 
   config = {
     name                = module.naming.firewall_policy.name
@@ -30,14 +30,14 @@ module "fw_policy" {
 
 module "collection_rule_groups" {
   source  = "cloudnationhq/fwp/azure//modules/collection-rule-groups"
-  version = "~> 3.0"
+  version = "~> 4.0"
 
   groups = local.collection_rule_groups
 }
 
 module "ip_groups" {
   source  = "cloudnationhq/fwp/azure//modules/ip-groups"
-  version = "~> 3.0"
+  version = "~> 4.0"
 
   resource_group_name = module.rg.groups.demo.name
   location            = module.rg.groups.demo.location
