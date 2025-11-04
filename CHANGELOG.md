@@ -11,6 +11,12 @@
 
 * restructure tls_certificate to include role assignment properties ([#38](https://github.com/CloudNationHQ/terraform-azure-fwp/issues/38)) ([3503be5](https://github.com/CloudNationHQ/terraform-azure-fwp/commit/3503be5a4482e12036bc293b95033fdc8a766f1d))
 
+### Upgrade from v3.2.0 to v4.0.0:
+
+- Update module reference to: version = "~> 4.0"
+- The key_vault_id and principal_id properties are moved from config root level into the tls_certificate object.
+   - Users must update their variable structure to nest these properties within tls_certificate.
+
 ## [3.2.0](https://github.com/CloudNationHQ/terraform-azure-fwp/compare/v3.1.0...v3.2.0) (2025-10-21)
 
 
