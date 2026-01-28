@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.1](https://github.com/CloudNationHQ/terraform-azure-fwp/compare/v4.0.0...v4.0.1) (2026-01-28)
+
+
+### Bug Fixes
+
+* remove faulty validation collection rule groups ([#44](https://github.com/CloudNationHQ/terraform-azure-fwp/issues/44)) ([7138b90](https://github.com/CloudNationHQ/terraform-azure-fwp/commit/7138b90706b5864b7e23b5a62b3a52f36975127c))
+
 ## [4.0.0](https://github.com/CloudNationHQ/terraform-azure-fwp/compare/v3.2.0...v4.0.0) (2025-11-04)
 
 
