@@ -69,12 +69,4 @@ variable "groups" {
       }))
     })), {})
   }))
-
-  validation {
-    condition = var.firewall_policy_id != null || alltrue([
-      for group_key, group in var.groups :
-      group.firewall_policy_id != null
-    ])
-    error_message = "If the top-level firewall_policy_id is not set, each group in the groups map must have its own firewall_policy_id specified."
-  }
 }
