@@ -1,5 +1,14 @@
 # Changelog
 
+## [4.1.0](https://github.com/CloudNationHQ/terraform-azure-fwp/compare/v4.0.1...v4.1.0) (2026-07-10)
+
+
+### Features
+
+* **deps:** bump golang.org/x/crypto from 0.36.0 to 0.45.0 in /tests ([#41](https://github.com/CloudNationHQ/terraform-azure-fwp/issues/41)) ([c12897d](https://github.com/CloudNationHQ/terraform-azure-fwp/commit/c12897d4f3131a3e31554cc0f03d28803a764a95))
+* **deps:** bump golang.org/x/crypto from 0.51.0 to 0.52.0 in /tests ([#48](https://github.com/CloudNationHQ/terraform-azure-fwp/issues/48)) ([c7e5a50](https://github.com/CloudNationHQ/terraform-azure-fwp/commit/c7e5a50f7a622c237c644d278e342e063c048069))
+* **deps:** bump golang.org/x/net from 0.47.0 to 0.55.0 in /tests ([#47](https://github.com/CloudNationHQ/terraform-azure-fwp/issues/47)) ([a351326](https://github.com/CloudNationHQ/terraform-azure-fwp/commit/a351326069608fcbfc43eace6030e4cee66dce2f))
+
 ## [4.0.1](https://github.com/CloudNationHQ/terraform-azure-fwp/compare/v4.0.0...v4.0.1) (2026-01-28)
 
 
