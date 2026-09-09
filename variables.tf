@@ -1,21 +1,19 @@
-variable "config" {
+variable "firewall_policy" {
   description = "Contains all firewall policy configuration"
   type = object({
     name                              = string
     resource_group_name               = optional(string)
     location                          = optional(string)
     private_ip_ranges                 = optional(list(string))
-    sku                               = optional(string, "Standard")
+    sku                               = optional(string)
     sql_redirect_allowed              = optional(bool)
-    threat_intelligence_mode          = optional(string, "Alert")
+    threat_intelligence_mode          = optional(string)
     base_policy_id                    = optional(string)
     auto_learn_private_ranges_enabled = optional(bool)
     tags                              = optional(map(string))
-    key_vault_id                      = optional(string)
-    principal_id                      = optional(string)
     dns = optional(object({
-      proxy_enabled = optional(bool, false)
-      servers       = optional(list(string), [])
+      proxy_enabled = optional(bool)
+      servers       = optional(list(string))
     }))
     intrusion_detection = optional(object({
       mode           = optional(string)
@@ -23,11 +21,11 @@ variable "config" {
       traffic_bypass = optional(map(object({
         protocol              = string
         description           = optional(string)
-        destination_addresses = optional(list(string), [])
-        destination_ip_groups = optional(list(string), [])
-        destination_ports     = optional(list(string), [])
-        source_addresses      = optional(list(string), [])
-        source_ip_groups      = optional(list(string), [])
+        destination_addresses = optional(list(string))
+        destination_ip_groups = optional(list(string))
+        destination_ports     = optional(list(string))
+        source_addresses      = optional(list(string))
+        source_ip_groups      = optional(list(string))
       })), {})
       signature_overrides = optional(map(object({
         id    = optional(string)
@@ -39,20 +37,22 @@ variable "config" {
       identity_ids = list(string)
     }))
     tls_certificate = optional(object({
-      key_vault_secret_id                    = string
-      name                                   = string
-      key_vault_id                           = string
+      key_vault_secret_id = string
+      name                = string
+    }))
+    role_assignments = optional(map(object({
+      scope                                  = string
       principal_id                           = string
-      role_assignment_name                   = optional(string)
-      role_definition_name                   = optional(string, "Key Vault Secrets User")
+      name                                   = optional(string)
+      role_definition_name                   = optional(string)
       role_definition_id                     = optional(string)
+      description                            = optional(string)
+      principal_type                         = optional(string)
       condition                              = optional(string)
       condition_version                      = optional(string)
-      description                            = optional(string, "Key Vault Secrets User role assignment for firewall policy")
       delegated_managed_identity_resource_id = optional(string)
       skip_service_principal_aad_check       = optional(bool)
-      principal_type                         = optional(string, "ServicePrincipal")
-    }))
+    })), {})
     explicit_proxy = optional(object({
       enabled         = optional(bool)
       http_port       = optional(number)
@@ -77,12 +77,12 @@ variable "config" {
   })
 
   validation {
-    condition     = var.config.location != null || var.location != null
+    condition     = var.firewall_policy.location != null || var.location != null
     error_message = "location must be provided either in the object or as a separate variable."
   }
 
   validation {
-    condition     = var.config.resource_group_name != null || var.resource_group_name != null
+    condition     = var.firewall_policy.resource_group_name != null || var.resource_group_name != null
     error_message = "resource group name must be provided either in the object or as a separate variable."
   }
 }

@@ -3,7 +3,7 @@ locals {
     default = {
       name               = "EnhancedSecurityRuleCollectionGroup"
       priority           = 200
-      firewall_policy_id = module.fw_policy.config.id
+      firewall_policy_id = module.fw_policy.firewall_policy.id
       network_rule_collections = {
         CorporateWebAccessRules = {
           priority = 100

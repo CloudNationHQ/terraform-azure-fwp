@@ -25,21 +25,13 @@ module "fw_policy" {
     name                = module.naming.firewall_policy.name
     resource_group_name = module.rg.groups.demo.name
     location            = module.rg.groups.demo.location
+    sku                 = "Standard"
+
+    explicit_proxy = {
+      enabled         = true
+      http_port       = 8080
+      https_port      = 8443
+      enable_pac_file = false
+    }
   }
-}
-
-module "collection_rule_groups" {
-  source  = "cloudnationhq/fwp/azure//modules/collection-rule-groups"
-  version = "~> 5.0"
-
-  groups = local.collection_rule_groups
-}
-
-module "ip_groups" {
-  source  = "cloudnationhq/fwp/azure//modules/ip-groups"
-  version = "~> 5.0"
-
-  resource_group_name = module.rg.groups.demo.name
-  location            = module.rg.groups.demo.location
-  ip_groups           = local.ip_groups
 }

@@ -7,6 +7,7 @@ variable "ip_groups" {
     cidr                = any
     tags                = optional(map(string))
   }))
+  default = {}
 }
 
 variable "tags" {
@@ -27,8 +28,4 @@ variable "resource_group_name" {
   default     = null
 }
 
-variable "naming" {
-  description = "contains naming convention"
-  type        = map(string)
-  default     = null
-}
+

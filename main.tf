@@ -1,30 +1,27 @@
 # firewall policy
-resource "azurerm_firewall_policy" "policy" {
+resource "azurerm_firewall_policy" "this" {
   resource_group_name = coalesce(
-    lookup(
-      var.config, "resource_group_name", null
-    ), var.resource_group_name
+    var.firewall_policy.resource_group_name, var.resource_group_name
   )
 
   location = coalesce(
-    lookup(var.config, "location", null
-    ), var.location
+    var.firewall_policy.location, var.location
   )
 
-  name                              = var.config.name
-  private_ip_ranges                 = var.config.private_ip_ranges
-  sku                               = var.config.sku
-  sql_redirect_allowed              = var.config.sql_redirect_allowed
-  threat_intelligence_mode          = var.config.threat_intelligence_mode
-  base_policy_id                    = var.config.base_policy_id
-  auto_learn_private_ranges_enabled = var.config.auto_learn_private_ranges_enabled
+  name                              = var.firewall_policy.name
+  private_ip_ranges                 = var.firewall_policy.private_ip_ranges
+  sku                               = var.firewall_policy.sku
+  sql_redirect_allowed              = var.firewall_policy.sql_redirect_allowed
+  threat_intelligence_mode          = var.firewall_policy.threat_intelligence_mode
+  base_policy_id                    = var.firewall_policy.base_policy_id
+  auto_learn_private_ranges_enabled = var.firewall_policy.auto_learn_private_ranges_enabled
 
   tags = coalesce(
-    var.config.tags, var.tags
+    var.firewall_policy.tags, var.tags
   )
 
   dynamic "dns" {
-    for_each = lookup(var.config, "dns", null) != null ? [var.config.dns] : []
+    for_each = var.firewall_policy.dns != null ? { "this" = var.firewall_policy.dns } : {}
 
     content {
       proxy_enabled = dns.value.proxy_enabled
@@ -33,16 +30,14 @@ resource "azurerm_firewall_policy" "policy" {
   }
 
   dynamic "intrusion_detection" {
-    for_each = lookup(var.config, "intrusion_detection", null) != null ? [var.config.intrusion_detection] : []
+    for_each = var.firewall_policy.intrusion_detection != null ? { "this" = var.firewall_policy.intrusion_detection } : {}
 
     content {
       mode           = intrusion_detection.value.mode
       private_ranges = intrusion_detection.value.private_ranges
 
       dynamic "traffic_bypass" {
-        for_each = lookup(
-          intrusion_detection.value, "traffic_bypass", {}
-        )
+        for_each = intrusion_detection.value.traffic_bypass
 
         content {
           name                  = traffic_bypass.key
@@ -57,9 +52,7 @@ resource "azurerm_firewall_policy" "policy" {
       }
 
       dynamic "signature_overrides" {
-        for_each = lookup(
-          intrusion_detection.value, "signature_overrides", {}
-        )
+        for_each = intrusion_detection.value.signature_overrides
 
         content {
           id    = signature_overrides.value.id
@@ -70,7 +63,7 @@ resource "azurerm_firewall_policy" "policy" {
   }
 
   dynamic "identity" {
-    for_each = lookup(var.config, "identity", null) != null ? [var.config.identity] : []
+    for_each = var.firewall_policy.identity != null ? { "this" = var.firewall_policy.identity } : {}
 
     content {
       type         = identity.value.type
@@ -79,7 +72,7 @@ resource "azurerm_firewall_policy" "policy" {
   }
 
   dynamic "tls_certificate" {
-    for_each = lookup(var.config, "tls_certificate", null) != null ? [var.config.tls_certificate] : []
+    for_each = var.firewall_policy.tls_certificate != null ? { "this" = var.firewall_policy.tls_certificate } : {}
 
     content {
       key_vault_secret_id = tls_certificate.value.key_vault_secret_id
@@ -88,7 +81,7 @@ resource "azurerm_firewall_policy" "policy" {
   }
 
   dynamic "explicit_proxy" {
-    for_each = lookup(var.config, "explicit_proxy", null) != null ? [var.config.explicit_proxy] : []
+    for_each = var.firewall_policy.explicit_proxy != null ? { "this" = var.firewall_policy.explicit_proxy } : {}
 
     content {
       enabled         = explicit_proxy.value.enabled
@@ -101,7 +94,7 @@ resource "azurerm_firewall_policy" "policy" {
   }
 
   dynamic "threat_intelligence_allowlist" {
-    for_each = lookup(var.config, "threat_intelligence_allowlist", null) != null ? [var.config.threat_intelligence_allowlist] : []
+    for_each = var.firewall_policy.threat_intelligence_allowlist != null ? { "this" = var.firewall_policy.threat_intelligence_allowlist } : {}
 
     content {
       fqdns        = threat_intelligence_allowlist.value.fqdns
@@ -110,7 +103,7 @@ resource "azurerm_firewall_policy" "policy" {
   }
 
   dynamic "insights" {
-    for_each = lookup(var.config, "insights", null) != null ? [var.config.insights] : []
+    for_each = var.firewall_policy.insights != null ? { "this" = var.firewall_policy.insights } : {}
 
     content {
       enabled                            = insights.value.enabled
@@ -118,9 +111,7 @@ resource "azurerm_firewall_policy" "policy" {
       retention_in_days                  = insights.value.retention_in_days
 
       dynamic "log_analytics_workspace" {
-        for_each = lookup(
-          insights.value, "log_analytics_workspace", {}
-        )
+        for_each = insights.value.log_analytics_workspace
 
         content {
           id                = log_analytics_workspace.value.id
@@ -133,22 +124,22 @@ resource "azurerm_firewall_policy" "policy" {
   lifecycle {
     create_before_destroy = true
   }
-  depends_on = [azurerm_role_assignment.role]
+  depends_on = [azurerm_role_assignment.this]
 }
 
-# role assignment
-resource "azurerm_role_assignment" "role" {
-  for_each = lookup(var.config, "tls_certificate", null) != null ? { "tls_cert" = var.config.tls_certificate } : {}
+# role assignments
+resource "azurerm_role_assignment" "this" {
+  for_each = var.firewall_policy.role_assignments
 
-  scope                                  = each.value.key_vault_id
-  name                                   = each.value.role_assignment_name
+  name                                   = each.value.name
+  scope                                  = each.value.scope
+  principal_id                           = each.value.principal_id
   role_definition_name                   = each.value.role_definition_name
   role_definition_id                     = each.value.role_definition_id
-  principal_id                           = each.value.principal_id
+  description                            = each.value.description
+  principal_type                         = each.value.principal_type
   condition                              = each.value.condition
   condition_version                      = each.value.condition_version
-  description                            = each.value.description
   delegated_managed_identity_resource_id = each.value.delegated_managed_identity_resource_id
   skip_service_principal_aad_check       = each.value.skip_service_principal_aad_check
-  principal_type                         = each.value.principal_type
 }

@@ -19,26 +19,26 @@ The following requirements are needed by this module:
 
 - <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (~> 1.0)
 
-- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 4.0)
+- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 5.0)
 
 ## Providers
 
 The following providers are used by this module:
 
-- <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 4.0)
+- <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 5.0)
 
 ## Resources
 
 The following resources are used by this module:
 
-- [azurerm_firewall_policy.policy](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/firewall_policy) (resource)
-- [azurerm_role_assignment.role](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) (resource)
+- [azurerm_firewall_policy.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/firewall_policy) (resource)
+- [azurerm_role_assignment.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) (resource)
 
 ## Required Inputs
 
 The following input variables are required:
 
-### <a name="input_config"></a> [config](#input\_config)
+### <a name="input_firewall_policy"></a> [firewall\_policy](#input\_firewall\_policy)
 
 Description: Contains all firewall policy configuration
 
@@ -50,17 +50,15 @@ object({
     resource_group_name               = optional(string)
     location                          = optional(string)
     private_ip_ranges                 = optional(list(string))
-    sku                               = optional(string, "Standard")
+    sku                               = optional(string)
     sql_redirect_allowed              = optional(bool)
-    threat_intelligence_mode          = optional(string, "Alert")
+    threat_intelligence_mode          = optional(string)
     base_policy_id                    = optional(string)
     auto_learn_private_ranges_enabled = optional(bool)
     tags                              = optional(map(string))
-    key_vault_id                      = optional(string)
-    principal_id                      = optional(string)
     dns = optional(object({
-      proxy_enabled = optional(bool, false)
-      servers       = optional(list(string), [])
+      proxy_enabled = optional(bool)
+      servers       = optional(list(string))
     }))
     intrusion_detection = optional(object({
       mode           = optional(string)
@@ -68,11 +66,11 @@ object({
       traffic_bypass = optional(map(object({
         protocol              = string
         description           = optional(string)
-        destination_addresses = optional(list(string), [])
-        destination_ip_groups = optional(list(string), [])
-        destination_ports     = optional(list(string), [])
-        source_addresses      = optional(list(string), [])
-        source_ip_groups      = optional(list(string), [])
+        destination_addresses = optional(list(string))
+        destination_ip_groups = optional(list(string))
+        destination_ports     = optional(list(string))
+        source_addresses      = optional(list(string))
+        source_ip_groups      = optional(list(string))
       })), {})
       signature_overrides = optional(map(object({
         id    = optional(string)
@@ -84,20 +82,22 @@ object({
       identity_ids = list(string)
     }))
     tls_certificate = optional(object({
-      key_vault_secret_id                    = string
-      name                                   = string
-      key_vault_id                           = string
+      key_vault_secret_id = string
+      name                = string
+    }))
+    role_assignments = optional(map(object({
+      scope                                  = string
       principal_id                           = string
-      role_assignment_name                   = optional(string)
-      role_definition_name                   = optional(string, "Key Vault Secrets User")
+      name                                   = optional(string)
+      role_definition_name                   = optional(string)
       role_definition_id                     = optional(string)
+      description                            = optional(string)
+      principal_type                         = optional(string)
       condition                              = optional(string)
       condition_version                      = optional(string)
-      description                            = optional(string, "Key Vault Secrets User role assignment for firewall policy")
       delegated_managed_identity_resource_id = optional(string)
       skip_service_principal_aad_check       = optional(bool)
-      principal_type                         = optional(string, "ServicePrincipal")
-    }))
+    })), {})
     explicit_proxy = optional(object({
       enabled         = optional(bool)
       http_port       = optional(number)
@@ -154,7 +154,7 @@ Default: `{}`
 
 The following outputs are exported:
 
-### <a name="output_config"></a> [config](#output\_config)
+### <a name="output_firewall_policy"></a> [firewall\_policy](#output\_firewall\_policy)
 
 Description: Contains all firewall policy configuration
 <!-- END_TF_DOCS -->
@@ -172,6 +172,8 @@ For more information, please see our testing [guidelines](./TESTING.md)
 Using a dedicated module, we've developed a naming convention for resources that's based on specific regular expressions for each type, ensuring correct abbreviations and offering flexibility with multiple prefixes and suffixes.
 
 Full examples detailing all usages, along with integrations with dependency modules, are located in the examples directory.
+
+Role assignments in `firewall_policy.role_assignments` are created before the firewall policy so the policy's identity has access to the key vault holding the `tls_certificate` at creation time. Because of this ordering, the policy's own id cannot be used as a `scope`; assign roles on the policy itself outside this module.
 
 To update the module's documentation run `make doc`
 

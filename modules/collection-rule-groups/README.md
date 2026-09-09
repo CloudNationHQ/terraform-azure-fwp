@@ -9,19 +9,19 @@ The following requirements are needed by this module:
 
 - <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (~> 1.0)
 
-- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 4.0)
+- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 5.0)
 
 ## Providers
 
 The following providers are used by this module:
 
-- <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 4.0)
+- <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 5.0)
 
 ## Resources
 
 The following resources are used by this module:
 
-- [azurerm_firewall_policy_rule_collection_group.group](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/firewall_policy_rule_collection_group) (resource)
+- [azurerm_firewall_policy_rule_collection_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/firewall_policy_rule_collection_group) (resource)
 
 ## Required Inputs
 
@@ -47,11 +47,11 @@ map(object({
         description           = optional(string)
         protocols             = list(string)
         destination_ports     = list(string)
-        destination_addresses = optional(list(string), [])
-        destination_fqdns     = optional(list(string), [])
-        source_addresses      = optional(list(string), [])
-        source_ip_groups      = optional(list(string), [])
-        destination_ip_groups = optional(list(string), [])
+        destination_addresses = optional(list(string))
+        destination_fqdns     = optional(list(string))
+        source_addresses      = optional(list(string))
+        source_ip_groups      = optional(list(string))
+        destination_ip_groups = optional(list(string))
       }))
     })), {})
     application_rule_collections = optional(map(object({
@@ -74,8 +74,8 @@ map(object({
           port = number
         })), [])
         http_headers = optional(list(object({
-          type = string
-          port = number
+          name  = string
+          value = string
         })), [])
       }))
     })), {})

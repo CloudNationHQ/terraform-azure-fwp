@@ -2,7 +2,7 @@ locals {
   collection_rule_groups = {
     default = {
       priority           = 1000
-      firewall_policy_id = module.fw_policy.config.id
+      firewall_policy_id = module.fw_policy.firewall_policy.id
       network_rule_collections = {
         netw_rules = {
           name     = "netwrules"
