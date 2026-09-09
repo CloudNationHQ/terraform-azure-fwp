@@ -1,9 +1,3 @@
-variable "firewall_policy_id" {
-  description = "The ID of the Firewall Policy to which rule collection groups will be applied."
-  type        = string
-  default     = null
-}
-
 variable "groups" {
   description = "Contains all firewall policy rule collection groups config"
   type = map(object({
@@ -19,11 +13,11 @@ variable "groups" {
         description           = optional(string)
         protocols             = list(string)
         destination_ports     = list(string)
-        destination_addresses = optional(list(string), [])
-        destination_fqdns     = optional(list(string), [])
-        source_addresses      = optional(list(string), [])
-        source_ip_groups      = optional(list(string), [])
-        destination_ip_groups = optional(list(string), [])
+        destination_addresses = optional(list(string))
+        destination_fqdns     = optional(list(string))
+        source_addresses      = optional(list(string))
+        source_ip_groups      = optional(list(string))
+        destination_ip_groups = optional(list(string))
       }))
     })), {})
     application_rule_collections = optional(map(object({
@@ -46,8 +40,8 @@ variable "groups" {
           port = number
         })), [])
         http_headers = optional(list(object({
-          type = string
-          port = number
+          name  = string
+          value = string
         })), [])
       }))
     })), {})
@@ -69,4 +63,10 @@ variable "groups" {
       }))
     })), {})
   }))
+}
+
+variable "firewall_policy_id" {
+  description = "The ID of the Firewall Policy to which rule collection groups will be applied."
+  type        = string
+  default     = null
 }

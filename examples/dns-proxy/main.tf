@@ -25,21 +25,14 @@ module "fw_policy" {
     name                = module.naming.firewall_policy.name
     resource_group_name = module.rg.groups.demo.name
     location            = module.rg.groups.demo.location
+    sku                 = "Standard"
+
+    private_ip_ranges                 = ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+    auto_learn_private_ranges_enabled = false
+
+    dns = {
+      proxy_enabled = true
+      servers       = ["10.0.0.4", "10.0.0.5"]
+    }
   }
-}
-
-module "collection_rule_groups" {
-  source  = "cloudnationhq/fwp/azure//modules/collection-rule-groups"
-  version = "~> 5.0"
-
-  groups = local.collection_rule_groups
-}
-
-module "ip_groups" {
-  source  = "cloudnationhq/fwp/azure//modules/ip-groups"
-  version = "~> 5.0"
-
-  resource_group_name = module.rg.groups.demo.name
-  location            = module.rg.groups.demo.location
-  ip_groups           = local.ip_groups
 }

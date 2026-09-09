@@ -1,17 +1,19 @@
 # collection groups
-resource "azurerm_firewall_policy_rule_collection_group" "group" {
+resource "azurerm_firewall_policy_rule_collection_group" "this" {
   for_each = var.groups
 
   name = coalesce(
     each.value.name, format("fwrcg-%s", each.key)
   )
 
-  firewall_policy_id = coalesce(var.groups[each.key].firewall_policy_id, var.firewall_policy_id)
+  firewall_policy_id = coalesce(
+    each.value.firewall_policy_id, var.firewall_policy_id
+  )
 
   priority = each.value.priority
 
   dynamic "network_rule_collection" {
-    for_each = contains(keys(each.value), "network_rule_collections") ? each.value.network_rule_collections : tomap({})
+    for_each = each.value.network_rule_collections
 
     content {
       name = coalesce(
@@ -43,7 +45,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "group" {
   }
 
   dynamic "application_rule_collection" {
-    for_each = contains(keys(each.value), "application_rule_collections") ? each.value.application_rule_collections : tomap({})
+    for_each = each.value.application_rule_collections
 
     content {
       name = coalesce(
@@ -94,7 +96,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "group" {
   }
 
   dynamic "nat_rule_collection" {
-    for_each = contains(keys(each.value), "nat_rule_collections") ? each.value.nat_rule_collections : tomap({})
+    for_each = each.value.nat_rule_collections
 
     content {
       name = coalesce(

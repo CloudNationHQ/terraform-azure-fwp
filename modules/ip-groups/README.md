@@ -9,23 +9,27 @@ The following requirements are needed by this module:
 
 - <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (~> 1.0)
 
-- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 4.0)
+- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 5.0)
 
 ## Providers
 
 The following providers are used by this module:
 
-- <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 4.0)
+- <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (~> 5.0)
 
 ## Resources
 
 The following resources are used by this module:
 
-- [azurerm_ip_group.ipgroup](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/ip_group) (resource)
+- [azurerm_ip_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/ip_group) (resource)
 
 ## Required Inputs
 
-The following input variables are required:
+No required inputs.
+
+## Optional Inputs
+
+The following input variables are optional (have default values):
 
 ### <a name="input_ip_groups"></a> [ip\_groups](#input\_ip\_groups)
 
@@ -43,23 +47,13 @@ map(object({
   }))
 ```
 
-## Optional Inputs
-
-The following input variables are optional (have default values):
+Default: `{}`
 
 ### <a name="input_location"></a> [location](#input\_location)
 
 Description: contains the region
 
 Type: `string`
-
-Default: `null`
-
-### <a name="input_naming"></a> [naming](#input\_naming)
-
-Description: contains naming convention
-
-Type: `map(string)`
 
 Default: `null`
 
