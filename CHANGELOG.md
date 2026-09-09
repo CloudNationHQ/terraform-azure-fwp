@@ -1,5 +1,16 @@
 # Changelog
 
+## [5.0.0](https://github.com/CloudNationHQ/terraform-azure-fwp/compare/v4.1.0...v5.0.0) (2026-09-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* this change causes recreates
+
+### Features
+
+* azurerm provider 5 upgrade ([#50](https://github.com/CloudNationHQ/terraform-azure-fwp/issues/50)) ([987f4bc](https://github.com/CloudNationHQ/terraform-azure-fwp/commit/987f4bc24e02859e8fbad82bfa0440e8da2bdbeb))
+
 ## [4.1.0](https://github.com/CloudNationHQ/terraform-azure-fwp/compare/v4.0.1...v4.1.0) (2026-07-10)
 
 
