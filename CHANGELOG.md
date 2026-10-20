@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.1.0](https://github.com/CloudNationHQ/terraform-azure-fwp/compare/v5.0.0...v5.1.0) (2026-10-20)
+
+
+### Features
+
+* **deps:** bump github.com/klauspost/compress in /tests ([#52](https://github.com/CloudNationHQ/terraform-azure-fwp/issues/52)) ([7d911e0](https://github.com/CloudNationHQ/terraform-azure-fwp/commit/7d911e0a8d23f61d76804819ad2c5765bdbe5bc6))
+
 ## [5.0.0](https://github.com/CloudNationHQ/terraform-azure-fwp/compare/v4.1.0...v5.0.0) (2026-09-09)
 
 
