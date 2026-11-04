@@ -175,7 +175,7 @@ Full examples detailing all usages, along with integrations with dependency modu
 
 Role assignments in `firewall_policy.role_assignments` are created before the firewall policy so the policy's identity has access to the key vault holding the `tls_certificate` at creation time. Because of this ordering, the policy's own id cannot be used as a `scope`; assign roles on the policy itself outside this module.
 
-To update the module's documentation run `make doc`
+To update the module's documentation run `make docs`
 
 ## Contributors
 
